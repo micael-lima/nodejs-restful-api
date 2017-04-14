@@ -4,7 +4,8 @@
   "description": "Modelo de restful-api com nodejs.",
   "main": "server.js",
   "scripts": {
-    "test": "node server.js"
+    "start": "babel-node ./server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,11 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-node6": "^11.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.4",
+    "morgan": "^1.8.1"
   }
 }
