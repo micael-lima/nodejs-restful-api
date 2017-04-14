@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-restful-api",
+  "version": "0.0.0",
+  "description": "Modelo de restful-api com nodejs.",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micaelsouza/nodejs-restful-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "restful",
+    "api"
+  ],
+  "author": "Micael Souza <micael.souza@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micaelsouza/nodejs-restful-api/issues"
+  },
+  "homepage": "https://github.com/micaelsouza/nodejs-restful-api#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-node6": "^11.0.0"
+  }
+}
