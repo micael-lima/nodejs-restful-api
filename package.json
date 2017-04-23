@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node ./server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./server.js --exec babel-node",
+    "watch": "babel-watch ./server.js"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,13 @@
   "homepage": "https://github.com/micaelsouza/nodejs-restful-api#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-node6": "^11.0.0"
+    "babel-preset-node6": "^11.0.0",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.9.4",
     "morgan": "^1.8.1"
   }
