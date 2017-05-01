@@ -14,14 +14,26 @@ class JWTAuth {
 
     if (token) {
       jwt.verify(token, jwtSecret, (err, decoded) => {
-        if (err) return res.status(400).json();
+        if (err) return res.status(401).json({
+          error: {
+            code: 401,
+            type: 'Unauthorized',
+            message: 'Invalid token'
+          }
+        });
 
         req.decoded = decoded;
 
         next();
       });
     } else {
-      return res.status(401).json();
+      return res.status(400).json({
+        error: {
+          code: 400,
+          type: 'Bad Request',
+          message: 'Missing required token'
+        }
+      });
     }
   }
 }
