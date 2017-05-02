@@ -1,17 +1,23 @@
 import express from 'express';
-import JWTAuth from '../middlewares/jwt-auth';
+import JWTHandler from '../common/jwt-handler';
 import AuthController from '../controllers/auth';
 import User from '../models/user';
 
 const router = express.Router();
-const jwtAuth = new JWTAuth();
-const authController = new AuthController(User, jwtAuth);
+const jwtHandler = new JWTHandler();
+const authController = new AuthController(User, jwtHandler);
 
 router.use((req, res, next) => {
   let {email, password} = req.body;
 
   if (!email || !password)
-    return res.status(400).json();
+    return res.status(400).json({
+      error: {
+        code: 400,
+        type: 'Bad Request',
+        message: 'Missing required email and password'
+      }
+    });
 
   next();
 });

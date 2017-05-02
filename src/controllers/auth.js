@@ -1,19 +1,19 @@
 class AuthController {
-  constructor(User, jwtAuth) {
-    Object.assign(this, {User, jwtAuth});
+  constructor(User, jwtHandler) {
+    Object.assign(this, {User, jwtHandler});
   }
 
   login(req, res) {
-    const {email, password} = req.body;
+    let {email, password} = req.body;
 
-    const user = new this.User();
+    let user = new this.User();
 
-    const hash = user.createHash(password);
+    let hash = user.createHash(password);
 
     return this.User
       .findOne({email, password: hash})
       .then(result => {
-        let token = this.jwtAuth.sign(result);
+        let token = this.jwtHandler.sign(result);
 
         return res.header('Authorization', token).json(result);
       })
@@ -27,9 +27,9 @@ class AuthController {
   }
 
   signup(req, res) {
-    const {email, password} = req.body;
+    let {email, password} = req.body;
 
-    const user = new this.User({email, password});
+    let user = new this.User({email, password});
 
     return this.User
       .findOne({email})

@@ -4,7 +4,7 @@ class ProductsController {
   }
 
   post(req, res) {
-    const product = req.body;
+    let product = req.body;
 
     return this.Product.create(product)
       .then(newProduct => res.status(201).send(newProduct))
@@ -30,7 +30,7 @@ class ProductsController {
   }
 
   getById(req, res) {
-    const {productId} = req.params;
+    let {productId} = req.params;
 
     return this.Product.findById(productId)
       .then(product => {
@@ -49,11 +49,16 @@ class ProductsController {
   }
 
   update(req, res) {
-    const {productId} = req.params;
-    const product = req.body;
+    let {productId} = req.params;
+    let product = req.body;
 
     return this.Product.findByIdAndUpdate(productId, product, {new: true})
-      .then(result => {res.json(result)})
+      .then(result => {
+        if (!result)
+          throw new Error();
+
+        return res.json(result)
+      })
       .catch(err => res.json({
         error: {
           code: 404,
@@ -64,10 +69,15 @@ class ProductsController {
   }
 
   delete(req, res) {
-    const {productId} = req.params;
+    let {productId} = req.params;
 
     return this.Product.findByIdAndRemove(productId)
-      .then(() => res.status(204).end())
+      .then(result => {
+        if (!result)
+          throw new Error();
+
+        return res.status(204).end();
+      })
       .catch(err => res.status(404).send({
         error: {
           code: 404,
