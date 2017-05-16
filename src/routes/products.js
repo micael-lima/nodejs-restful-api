@@ -1,16 +1,15 @@
-import express from 'express';
-import jwtAuth from '../middlewares/jwt-auth';
-import ProductsController from '../controllers/products';
-import Product from '../models/product';
+'use strict'
+import express from 'express'
+import jwtAuth from '../middlewares/jwt-auth'
+import controller from '../controllers/products'
 
-const router = express.Router();
-const productsController = new ProductsController(Product);
+const router = express.Router()
 
-router.use(jwtAuth);
-router.post('/', (req, res) => productsController.post(req, res));
-router.get('/', (req, res) => productsController.get(req, res));
-router.get('/:productId', (req, res) => productsController.getById(req, res));
-router.put('/:productId', (req, res) => productsController.update(req, res));
-router.delete('/:productId', (req, res) => productsController.delete(req, res));
+router.use(jwtAuth)
+router.post('/', controller.post)
+router.get('/', controller.get)
+router.get('/:productId', controller.getById)
+router.put('/:productId', controller.update)
+router.delete('/:productId', controller.remove)
 
-export default router;
+export default router

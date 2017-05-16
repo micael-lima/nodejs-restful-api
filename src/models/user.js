@@ -1,5 +1,6 @@
-import mongoose from 'mongoose';
-import crypto from 'crypto';
+'use strict'
+import mongoose from 'mongoose'
+import crypto from 'crypto'
 
 const schema = new mongoose.Schema({
   email: {
@@ -11,24 +12,23 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   }
-});
+})
 
 schema.pre('save', function (next) {
-  let user = this;
-  let hash = crypto.createHash('md5').update(user.password).digest("hex");
+  let user = this
+  let hash = crypto.createHash('md5').update(user.password).digest('hex')
 
-  if (!user.isModified('password'))
-    return next();
+  if (!user.isModified('password')) return next()
 
-  user.password = hash;
+  user.password = hash
 
-  next();
-});
+  next()
+})
 
 schema.methods.createHash = (password) => {
-  return crypto.createHash('md5').update(password).digest("hex");
-};
+  return crypto.createHash('md5').update(password).digest('hex')
+}
 
-const User = mongoose.model('User', schema);
+const User = mongoose.model('User', schema)
 
-export default User;
+export default User
