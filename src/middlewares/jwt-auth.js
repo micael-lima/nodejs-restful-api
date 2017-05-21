@@ -1,20 +1,19 @@
-'use strict'
-import jwt from '../services/jwt'
+import jwt from '../services/jwt';
 
-function jwtAuth (req, res, next) {
-  let token = req.headers.authorization
+function jwtAuth(req, res, next) {
+  let token = req.headers.authorization;
 
   if (!token || !token.startsWith('Bearer')) {
     return res.status(400).json({
       error: {
         code: 400,
         type: 'Bad Request',
-        message: 'Missing required token'
-      }
-    })
+        message: 'Missing required token',
+      },
+    });
   }
 
-  token = token.split('Bearer').pop().trim()
+  token = token.split('Bearer').pop().trim();
 
   jwt.verify(token, (err, decoded) => {
     if (err) {
@@ -22,15 +21,18 @@ function jwtAuth (req, res, next) {
         error: {
           code: 401,
           type: 'Unauthorized',
-          message: 'Invalid token'
-        }
-      })
+          message: 'Invalid token',
+        },
+      });
     }
 
-    req.decoded = decoded
+    req.decoded = decoded;
 
-    next()
-  })
+    next();
+    return false;
+  });
+
+  return false;
 }
 
-export default jwtAuth
+export default jwtAuth;

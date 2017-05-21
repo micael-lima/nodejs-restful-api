@@ -1,10 +1,10 @@
-import setupApp from './src/app'
+import setupApp from './src/app';
 
-const port = 5000
+const port = 5000;
 
 setupApp()
-  .then(app => app.listen(port, () => console.log(`api running on port ${port}`)))
-  .catch(err => {
-    console.error(err)
-    process.exit(1)
-  })
+  .then(app => app.listen(port, () => process.stdout.write(`api running on port ${port}`)))
+  .catch((err) => {
+    process.stderr.write(`${err}\n`);
+    process.exit(1);
+  });
