@@ -6,6 +6,7 @@
   "scripts": {
     "start": "babel-node ./server.js",
     "dev": "nodemon ./server.js --exec babel-node",
+    "test-integration": "mocha --opts ./test/integration/mocha.opts ./test/integration/*.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint **/*.js --fix"
   },
@@ -27,10 +28,13 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-node6": "^11.0.0",
+    "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.2.0",
-    "nodemon": "^1.11.0"
+    "mocha": "^3.4.1",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
